@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hava Durumu Uygulaması</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="kart">
+      <div class="arama">
+        <input type="text" placeholder="Şehir adı girin" spellcheck="false" />
+        <button><img src="resimler/search.png" /></button>
+      </div>
+      <div class="hata">
+        <p>Tanımlanamayan Şehir Adı</p>
+      </div>
+      <div class="hava-durumu">
+        <img src="resimler/rain.png" class="hava-durumu-ikonu" />
+        <h1 class="sicaklik">10°C</h1>
+        <h2 class="sehir">Elazığ</h2>
+        <div class="detaylar">
+          <div class="sutun">
+            <img src="resimler/humidity.png" />
+            <div>
+              <p class="nem">50%</p>
+              <p>Nem Oranı</p>
+            </div>
+          </div>
+          <div class="sutun">
+            <img src="resimler/wind.png" />
+            <div>
+              <p class="ruzgar">15 km/h</p>
+              <p>Rüzgar Hızı</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const apiKey = "29f4d91316998ea980a137c87971fce7";
+      const apiUrl =
+        "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=";
+
+      const aramaKutusu = document.querySelector(".arama input");
+      const aramaButonu = document.querySelector(".arama button");
+      const havaDurumuIkonu = document.querySelector(".hava-durumu-ikonu");
+
+      async function havaDurumunuKontrolEt(sehir) {
+        const yanit = await fetch(apiUrl + sehir + `&appid=${apiKey}`);
+
+        if (yanit.status == 404) {
+          document.querySelector(".hata").style.display = "block";
+          document.querySelector(".hava-durumu").style.display = "none";
+        } else {
+          var veri = await yanit.json();
+
+          document.querySelector(".sehir").innerHTML = veri.name;
+          document.querySelector(".sicaklik").innerHTML =
+            Math.round(veri.main.temp) + "°C";
+          document.querySelector(".nem").innerHTML = veri.main.humidity + "%";
+          document.querySelector(".ruzgar").innerHTML =
+            veri.wind.speed + " km/h";
+
+          if (veri.weather[0].main == "Clouds") {
+            havaDurumuIkonu.src = "resimler/clouds.png";
+          } else if (veri.weather[0].main == "Clear") {
+            havaDurumuIkonu.src = "resimler/clear.png";
+          } else if (veri.weather[0].main == "Rain") {
+            havaDurumuIkonu.src = "resimler/rain.png";
+          } else if (veri.weather[0].main == "Drizzle") {
+            havaDurumuIkonu.src = "resimler/drizzle.png";
+          } else if (veri.weather[0].main == "Mist") {
+            havaDurumuIkonu.src = "resimler/mist.png";
+          }
+
+          document.querySelector(".hava-durumu").style.display = "block";
+          document.querySelector(".hata").style.display = "none";
+        }
+      }
+
+      aramaButonu.addEventListener("click", () => {
+        havaDurumunuKontrolEt(aramaKutusu.value);
+      });
+    </script>
+  </body>
+</html>

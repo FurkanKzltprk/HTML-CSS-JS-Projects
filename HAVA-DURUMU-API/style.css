@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #222;
+}
+
+.kart {
+  width: 90%;
+  max-width: 470px;
+  background: linear-gradient(135deg, #4ebc59, #1c0272);
+  color: #fff;
+  margin: 20px auto 0;
+  border-radius: 20px;
+  padding: 40px 35px;
+  text-align: center;
+}
+
+.arama {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.arama input {
+  border: 0;
+  outline: 0;
+  background: #ebfffc;
+  color: #555;
+  padding: 10px 25px;
+  height: 60px;
+  border-radius: 30px;
+  flex: 1;
+  margin-right: 16px;
+  font-size: 18px;
+}
+.arama button {
+  border: 0;
+  outline: 0;
+  background: #ebfffc;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+}
+.arama button img {
+  width: 16px;
+}
+
+.hava-durumu-ikonu {
+  width: 170px;
+  margin-top: 30px;
+}
+.hava-durumu h1 {
+  font-size: 45px;
+  font-weight: 400;
+  margin-top: -10px;
+}
+.detaylar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  margin-top: 50px;
+}
+
+.sutun {
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+.sutun img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.nem,
+.ruzgar {
+  font-size: 28px;
+  margin-top: -6px;
+}
+
+.hava-durumu {
+  display: none;
+}
+.hata {
+  text-align: left;
+  margin-left: 10px;
+  font-size: 14px;
+  margin-top: 10px;
+  display: none;
+}
